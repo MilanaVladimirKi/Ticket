@@ -1,5 +1,8 @@
 package ru.topacademy.javaqa.domain;
 
+import java.util.Comparator;
+import java.util.Arrays;
+
 public class AviaSouls {
     private Ticket[] tickets = new Ticket[0];
 
@@ -31,4 +34,18 @@ public class AviaSouls {
         }
         return result;
     }
+
+    public Ticket[] searchAndSortBy(String from, String to, Comparator<Ticket> comparator) {
+        Ticket[] result = new Ticket[0]; // массив для ответа
+        for (Ticket ticket : tickets) { // перебираем все билеты
+            if (ticket.getFrom().equals(from)) { // совпадает аэропорт вылета
+                if (ticket.getTo().equals(to)) { // совпадает аэропорт прилёта
+                    result = addToArray(result, ticket); // добавляем его в массив ответа
+                }
+            }
+        }
+        Arrays.sort(result, comparator);
+        return result;
+    }
+
 }
